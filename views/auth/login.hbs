@@ -1,0 +1,31 @@
+<h2>Log in</h2>
+
+<form action="/login" method="POST" id="form-container">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" name="username">
+  </div>
+  <br>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+  </div>
+  {{#if message}}
+    <br>
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <br><br>
+  <div>
+    <input type="submit" value="Log In">
+  </div>
+
+  <br>
+
+  <p class="account-message">
+    Don't have an account? Get in contact with the General Manager
+  </p>
+
+  <br><br>
+  <a href="/">Go Home</a>
+</form>

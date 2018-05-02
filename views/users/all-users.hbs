@@ -1,0 +1,13 @@
+<h1>These are all of the users</h1>
+<div>
+  you can 
+
+</div>
+
+{{#each allUsers}}
+
+  <h2><a href='single/{{this._id}}'>{{this.username}}</a></h2>
+  <h3>{{this.role}}</h3>
+
+
+{{/each}}

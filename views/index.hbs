@@ -1,2 +1,44 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
+<h2>
+  Welcome 
+  {{#if aUserIsLoggedIn}}
+    <span>{{user.username}}!</span>
+  {{/if}}
+</h2>
+
+
+<div id="container">
+  <ul>
+    {{!-- only show if the boss is logged in --}}
+    {{#if BOSS}}
+    <li>
+      <a href="/create-user">Create User</a>
+    </li>
+    {{/if}}
+
+    {{!-- only show if a user is NOT logged in --}}
+    {{#unless aUserIsLoggedIn}}
+    <li>
+      <a href="/login">Login</a>
+    </li>
+    {{/unless}}
+
+    {{!-- only show if the boss is logged in --}}
+    {{#if BOSS}}
+    <li>
+      <a href="/private">Protected page (only BOSS user can access)</a>
+    </li>
+    {{/if}}
+
+    {{!-- only show if a user is logged in --}}
+    {{#if aUserIsLoggedIn}}
+      <li>
+        <a href="/all-users">All Users</a>
+      </li>
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    {{/if}}
+  </ul>
+</div>

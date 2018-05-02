@@ -1,0 +1,26 @@
+<h2>Create User</h2>
+
+<form action="/create-user" method="POST" id="form-container">
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder="JonSnow">
+  <br><br>
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="Your password">
+
+  <br>
+
+  <br><input type="radio" name="role" value="STUDENT" checked> Student
+  <br><input type="radio" name="role" value="TA"> TA
+  <br><input type="radio" name="role" value="DEVELOPER"> Developer  
+
+  {{#if message}}
+    <br><br>
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+  <br><br>
+
+  <button>Create account</button>
+
+  <br><br>
+  <a href="/">Go Home</a>
+</form>

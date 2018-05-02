@@ -1,0 +1,15 @@
+<h1>{{showingUser.username}}</h1>
+<h2>{{showingUser.role}}</h2>
+
+{{!-- Edit should only be usable by the owner --}}
+<form action="/users/edit/{{this._id}}" method="post" >
+  <button type="submit"> Edit this user </button>
+</form>
+
+{{!-- only boss should be able to delete --}}
+  {{#if loggedUserIsBOSS}}
+  <form action="/users/delete/{{this._id}}" method="post" >
+    <button type="submit"> Delete {{this.username}} from the roster </button>
+  </form>
+  {{/if}}
+
