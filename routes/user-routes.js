@@ -18,6 +18,7 @@ function ensureAuthenticated(req, res, next) {
 function checkRoles(role) {
   return function(req, res, next) {
     if (req.isAuthenticated() && req.user.role === role) {
+      
       return next();
     } else {
       res.redirect('/')
@@ -38,7 +39,23 @@ router.get('/all-users', (req, res, next) => {
 });
 
 
+router.post('/users/delete/:id', (req,res,next) => {
+  
+  const userToDeleteId = req.params.id;
+
+  User.findByIdAndRemove(userToDeleteId)
+  .then(user =>{
+
+    res.redirect('/all-users')
+
+  })
+  .catch((err) => { console.log('error:', err) });
+
+})
+
+
 router.get('/single/:theUserId', (req, res, next) => {
+  // th ID of the user we are looking at
   const theId = req.params.theUserId
 
   User.findById(theId)
@@ -49,8 +66,18 @@ router.get('/single/:theUserId', (req, res, next) => {
     if(req.user){
       data.aUserIsLoggedIn = true;
       data.loggedUser = req.user;
-      data['loggedUserIs' + req.user.role] = true;
-      // if ()
+      
+      data['loggedUserRoleIs' + req.user.role] = true;
+
+      if(req.user._id == theId){
+        data.loggedUserOwnsTheAccount = true;
+      }
+
+      if(userToInspect.role === "BOSS"){
+        data.thisIsTheBossAccount = true;
+      }
+      
+      
     }
 
     res.render('users/single', data)

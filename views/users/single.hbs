@@ -2,14 +2,26 @@
 <h2>{{showingUser.role}}</h2>
 
 {{!-- Edit should only be usable by the owner --}}
-<form action="/users/edit/{{this._id}}" method="post" >
+{{#if loggedUserOwnsTheAccount}}
+<form action="/users/edit/{{showingUser._id}}" method="post" >
   <button type="submit"> Edit this user </button>
 </form>
+{{/if}}
+
 
 {{!-- only boss should be able to delete --}}
-  {{#if loggedUserIsBOSS}}
-  <form action="/users/delete/{{this._id}}" method="post" >
+{{#if loggedUserRoleIsBOSS}}
+  {{!-- but not even the BOSS is BOSS enough to delete the BOSS --}}
+  {{#unless thisIsTheBossAccount}}
+  <form action=`/users/delete/{{showingUser._id}}` method="post" >
     <button type="submit"> Delete {{this.username}} from the roster </button>
   </form>
-  {{/if}}
+  {{/unless}}
+{{/if}}
+
+<br><br>
+
+<div>
+  you can <a href="/">Go Home</a> or <a href="/logout">Logout</a>
+</div>
 
